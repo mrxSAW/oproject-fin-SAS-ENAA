@@ -66,8 +66,8 @@ function triLivreAnnee () {                          // fonction de tri des livr
 function afficheLivreDispo() {                   // fonction d'affichage des livre disponible      
     let i                           
                                                       
-     for ( i = 0; i < TabLivre.length; i++) {        // loop pour afficher les element sucsessif
-        if (TabLivre.length === 0 && TabLivre[i].disponible !== "oui") {                // cas ou le tableau vide ou pas de livre dispo 
+     for ( i = 0; i < TabLivre.length; i++) {                                           // loop pour afficher les element sucsessif
+        if (TabLivre.length === 0 || TabLivre[i].disponible !== "oui") {                // cas ou le tableau vide ou pas de livre dispo 
                                              console.log("Aucun livre disponible.")     // message non dispo 
                                            } 
         if (TabLivre[i].disponible == "oui"){                                          // cas  de livre disponible 
@@ -112,15 +112,15 @@ function afficheAbonne(){                  // fonction affichage abonnee
 
 function emprunt(){                      // fonction enrgistrer une emprient 
     let idLivre = +prompt("Entrez l'ID du livre à emprunter : ")     // demande id livre       
-  let idAbonne = +prompt("Entrez l'ID de l'abonné : ")               // demande  id 
+                
 
                                                          // Vérif si le livre  disponible
   let livre = TabLivre.find(l => l.id === idLivre)       // trouve livre 
   if (!livre || livre.disponible !== "oui") {                //si le livre non disponible ou id non trouver dans aucun objet
     console.log("Livre non disponible ou inexistant.")      // message livre inixistant 
     return                                                  // sorter de la fonction livre non trouver 
-  }
-
+                                             }
+      let idAbonne = +prompt("Entrez l'ID de l'abonné : ") 
                                                               // Enregistrer l'emprunt
   emprunttab.push({ idLivre, idAbonne })                      // ajout l'objt au tableau 
   livre.disponible = "non"                                   // changer statu a non
