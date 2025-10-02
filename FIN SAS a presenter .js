@@ -119,106 +119,13 @@ function afficheAbonne(){                  // fonction affichage abonnee
                 }
                          }
 
-function emprunt(){                      // fonction enrgistrer une emprient 
-  
-        afficherLivres()
-       idLivre = Number(prompt("\n Entrez l'ID du livre à emprunter (nomber plus 100): ") )       
-                
-                                 
-   let LivreChek = TabLivre.find(l => l.id === idLivre)   
-   while(!LivreChek)    {
-    console.log("id inixestant")
-    idLivre = Number(prompt("\nEntrez l'ID du livre à emprunter (nomber plus 100): ") )       
-                
-                                 
-   LivreChek = TabLivre.find(l => l.id === idLivre) 
-   }
-  if (!LivreChek || LivreChek.disponible !== "oui") {                
-    console.log("\nLivre non disponible ou inexistant.")      
-                                                    
-         }
-
-    
-        afficheAbonne()
-  let idAbonne = Number(prompt("\nEntrez l'ID de l'abonné : ") )
-  let  aboneeChek = Tababonne.find(l => l.id === idAbonne) 
-  
-  while(!aboneeChek)    {
-    console.log("\n id inixestant")
-    idAbonne = Number(prompt("\n Entrez l'ID  abonne: ") )       
-                
-                                 
-   aboneeChek = Tababonne.find(l => l.id === idAbonne) 
-   }
-
-   if (!aboneeChek) {                
-    console.log("\n abonne enixistant.")      
-                                                    
-         }
-
-                                                              // Enregistrer l'emprunt
-  emprunttab.push({ idLivre, idAbonne })                       
-  LivreChek.disponible = "non"                                  
-  console.log("\n Emprunt enregistré avec succès !")            
-  console.log(emprunttab)                                    
-                    }                              
-
-function retournerLivre() {            // fonction retourner livre 
-  let idLivreR = Number(prompt("\n Entrez l'ID du livre à retourner : "));    
-           
- 
- 
-   let LivreChek = emprunttab.find(l => l.idLivre === idLivreR)   
-   while(!LivreChek)    {
-    console.log("\n id inixestant dans les emprunt ")
-    idLivreR = Number(prompt("\n Entrez l'ID du livre a retourner : ") )       
-                
-                                 
-   LivreChek = emprunttab.find(l => l.idLivre === idLivreR) 
-   }
-
-
- let idAbonneR = Number(prompt("\n Entrez l'ID de l'abonné : ")); 
-
- let idAbonneChek = emprunttab.find(l => l.idAbonne === idAbonneR)   
-   while(!idAbonneChek)    {
-    console.log("\n id inixestant dans les emprunt ")
-    idAbonneR = Number(prompt("\n Entrez l'ID abonne a nouveau : ") )       
-                
-                                 
-   idAbonneChek = emprunttab.find(l => l.idAbonne === idAbonneR) 
-   }
-
-
-
-
-
-  let trouve = false;
-  for (let i = 0; i < emprunttab.length; i++) {                              
-    if (emprunttab[i].idLivre === idLivreR && emprunttab[i].idAbonne === idAbonneR) {          
-      emprunttab.splice(i, 1);                                   
-
-                                         // retrouver le livre et changer sa disponibilité
-      let livre = TabLivre.find(l => l.id === idLivreR);      
-      if (livre) {livre.disponible = "oui";                          
-
-      console.log("\n Retour enregistré !");                    
-      trouve = true;                                        
-      break;                                                
-                                                         }                                                   }
-                                                }
-
-  if (!trouve) {                                         
-    console.log("\n Aucun emprunt trouvé.");                 
-                }
-                           }
 
 
 
                                        // ========== menu principale ==========
 
 do{
-  console.log(`\n ====== Gestion de bibliotheque ====== \n entrer un nombre pour choisire l'operation voulu   \n 1:ajouter liver \n 2:ajouter plusieur livre \n 3:afficher livre \n 4:tri asd/dec \n 5:tri annee \n 6:afficher livre disponible \n 7:rechrche livre par ID \n 8:ajouter abonnee \n 9:afficher abonnee \n 10:enregistrer emprunt \n 11:enregister un routour \n 12: quiter  `)
+  console.log(`\n ====== Gestion de bibliotheque ====== \n entrer un nombre pour choisire l'operation voulu   \n 1:ajouter liver \n 2:ajouter plusieur livre \n 3:afficher livre \n 4:tri asd/dec \n 5:tri annee \n 6:afficher livre disponible \n 7:rechrche livre par ID \n 8:ajouter abonnee \n 9:afficher abonnee  \n 12: quiter  `)
   choix = prompt("entre un choix ")             
 
    
@@ -249,12 +156,7 @@ do{
         else if (choix == 9) {
                         afficheAbonne()
                               }
-        else if (choix == 10) {
-                        emprunt()
-                            }
-        else if (choix == 11) {
-                        retournerLivre()
-                             }
+       
         else if (choix == 12) {
                         console.log("merci")
                                }
