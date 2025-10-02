@@ -1,168 +1,228 @@
 const prompt = require('prompt-sync')(); 
 
-let TabLivre   = []     // declaration du tableau a livre 
-let Tababonne  = []    // declaration du tableau a abonnée
-let emprunttab = []   // declaration du tableau a emprunt 
-let choix            // declaration du variable -choix- a reutiliser 
-let i               // i a utuliser ulterierment 
+let TabLivre   = []     
+let Tababonne  = []    
+let emprunttab = []   
+let choix            
+let i               
   
 function ajouterLivre (){                  //fonction pour ajouter les livre 
                                      
-    i=1                              // initialisation a 1 pour que id debut par 1
-    let livre = {}                      // declaration de l'object libre a pousher dans le tableau des livre 
-    livre.id         = TabLivre.length + 100              // l'id va etre assigner automatiqueme est s'incrimente pour chaque livre 
-    livre.titre      = prompt(`Titre du livre :` )          // demmander le titre du livre    
-    livre.auteur     = prompt("Auteur du livre : ")           // demander le nom de l'auteur 
-    livre.annee      = prompt("Année de publication : ")                      // demander l'annee de publication 
-    livre.disponible = prompt("Le livre est-il disponible ? (oui/non) : ")            // demander l'etat du livre si il est disponoble ou non 
-    TabLivre.push(livre)                         // ajouter le livre a la fin du tableau 
-    console.log("Livre ajouté avec succès !")                  // affichage du succes de l'auperation 
+                                
+    let livre = {}                      
+    livre.id         = TabLivre.length + 100 
+    console.log("\n entrer les informations du livre \n")              
+    livre.titre      = prompt(`Titre du livre :` )             
+    livre.auteur     = prompt("Auteur du livre : ")            
+    livre.annee      = prompt("Année de publication : ")                      
+    livre.disponible = "oui"          
+    TabLivre.push(livre)                         
+    console.log("Livre ajouté avec succès !")                  
                            }
 
 function ajouterPlusLivre (){                    // fonction d'ajout de plusieur livre 
-    let Nlivres = Number(prompt("Combien de livres voulez-vous ajouter ? (nombre seulment) : "))    // nombre des livre a ajouter
-    for (let i = 0; i < Nlivres; i++) {                           //loop pour repeter les instruction autent de livre a ajouter 
-        console.log(`\nAjout du livre ${i+1} :`)                 // affichage du numero de livre a ajouter 
-        ajouterLivre()                                           // appel de la fonction d'ajoute des livre precedente 
+    let Nlivres = Number(prompt(" \n Combien de livres voulez-vous ajouter ? (nombre seulment) :  "))  
+      
+    for (let i = 0; i < Nlivres; i++) {                           
+        console.log(`\nAjout du livre ${i+1} :`)                 
+        ajouterLivre()                                            
     }
                               }
 
 function afficherLivres() {                                // fonction d'affichage  des livre 
-    if (TabLivre.length === 0) {                           // cas ou tableau vide 
-            console.log("Aucun livre disponible.")         // message tableau vide   
+    if (TabLivre.length === 0) {                           
+            console.log("Aucun livre disponible.")            
                                 } 
     else {                                             
-            console.log("\nListe des livres :")             //  titre 
-       for(let i = 0; i < TabLivre.length; i++) {          // loop pour les livre un apres l'autre
-                              console.log(TabLivre [i])   // element a afficher 
+            console.log("\nListe des livres :")              
+       for(let i = 0; i < TabLivre.length; i++) {          
+                              console.log(TabLivre [i])    
                                                  }
          }
                              }
 
 function triLivreAscDec () {                            // fonction de tri des livre assendant ou dissandant par titre 
-    let x = prompt("enter 1 pour trie ascendant et 2 pour trie descendant : ")  // declaration du variable pour choix entre ascd est desnd
-    if (x == 1){                                                                // choix 1 lance un classement ascd 
-        let triAsc = [...TabLivre].sort((a, b) => a.titre.localeCompare(b.titre));     // creation un tableau copier du tableau tablivre et
-                                                                                       //la finction du tris qui va comparer des titre sucssisif est les replacer 
-       console .log(`le tri assendant des livre par titre : \n `)                 // titre 
-       console .log(triAsc)                                             // affichage du tri 
+    let x = prompt("enter 1 pour trie ascendant et 2 pour trie descendant : ")  
+    if (x == 1){                                                                
+        let triAsc = [...TabLivre].sort((a, b) => a.titre.localeCompare(b.titre));     
+                                                                                       
+       console .log(`le tri assendant des livre par titre : \n `)                  
+       console .log(triAsc)                                             
     } 
     else if (x == 2){                                                  // choix 2 lance le tri desaandant 
-        let triDesc = [...TabLivre].sort((a, b) => b.titre.localeCompare(a.titre));       // inverce de la fonction du tri Asc  
+        let triDesc = [...TabLivre].sort((a, b) => b.titre.localeCompare(a.titre));        
            
-          console .log(`le tri assendant des livre  par titre  : \n `)      // titre 
-           console .log(triDesc)                                // afichage du tri 
+          console .log(`le tri assendant des livre  par titre  : \n `)      
+           console .log(triDesc)                                 
                     }    
                              }
 
 function triLivreAnnee () {                          // fonction de tri des livre ASC par annee 
     
-        let triAsc = [...TabLivre].sort((a, b) => a.annee.localeCompare(b.annee));         // recoper le tab et trie par annee de publication 
-         console .log(`le tri assendant par annee  : \n `)                                 // titre 
-        console .log(triAsc)                                                                   // afichage du tri 
+        let triAsc = [...TabLivre].sort((a, b) => a.annee.localeCompare(b.annee));         
+         console .log(`le tri assendant par annee  : \n `)                                  
+        console .log(triAsc)                                                                   
     
                             }
 
 function afficheLivreDispo() {                   // fonction d'affichage des livre disponible      
-    let i                           
-                                                      
-     for ( i = 0; i < TabLivre.length; i++) {                                           // loop pour afficher les element sucsessif
-        if (TabLivre.length === 0 || TabLivre[i].disponible !== "oui") {                // cas ou le tableau vide ou pas de livre dispo 
-                                             console.log("Aucun livre disponible.")     // message non dispo 
-                                           } 
-        if (TabLivre[i].disponible == "oui"){                                          // cas  de livre disponible 
-                                            
-                                            console.log(TabLivre[i])                   // liste des livre dispo
-                                            }                        
-                                            }
+                                                                       
+let dispoTrouve = false;
+  console.log(" \nliste des livre disponible ")
+for (let i = 0; i < TabLivre.length; i++) {
+    if (TabLivre[i].disponible === "oui") {
+                                        console.log(TabLivre[i]);
+                                         dispoTrouve = true;
+                                          }
+                                           }
+
+if (!dispoTrouve) {
+    console.log("Aucun livre disponible.");
+                   }
+
                              }
 
 function rechercheID(){                        // fonction de recherche par ID 
-    let idRecherche = Number(prompt("Entrez l'ID du livre à rechercher : "))     // demande de id a rechercher 
-      for (let i = 0; i < TabLivre.length; i++) {                               //loop pour naviguer le tableau 
-        if (TabLivre[i].id === idRecherche) {                           //cas de correspandance 
-            console.log("Livre trouvé :\n", TabLivre[i])                // affichage du livre trouve
-            return
+    let idRecherche = Number(prompt("\n Entrez l'ID du livre à rechercher : "))      
+         let trouve=false  
+    for (let i = 0; i < TabLivre.length; i++) {                              
+        if (TabLivre[i].id === idRecherche) {                           
+            console.log("Livre trouvé :\n", TabLivre[i])                
+            trouve=true
+            
                                             }
                                             }
+           if (!trouve){console.log("livre introuvable ")}                                 
                        }                      
 
 function ajouterAbonne() {                   // fonction qui ajout un abonneé 
-    let abonne = {}                                 // creation de object abonne 
-    abonne.id = Tababonne.length + 1                // id automatique depant du tableau 
-    abonne.nom = prompt("Nom de l'abonné : ")        //  demande du nom 
-    abonne.prenom = prompt("Prénom de l'abonné : ")        // demande  du prenom 
-    abonne.telephone = prompt("Téléphone de l'abonné : ")  // demande nom du tel 
-    abonne.email = prompt("Email de l'abonné : ")          // demande email 
-    Tababonne.push(abonne)                                  // ajout de l'objet  au tableau  
-    console.log("Abonné ajouté avec succès !")               // message tach fait 
+    let abonne = {}  
+    console.log("\n entrer les information de l'abonne")                                 
+    abonne.id = Tababonne.length + 1                
+    abonne.nom = prompt("Nom de l'abonné : ")        
+    abonne.prenom = prompt("Prénom de l'abonné : ")         
+    abonne.telephone = prompt("Téléphone de l'abonné : ")   
+    abonne.email = prompt("Email de l'abonné : ")           
+    Tababonne.push(abonne)                                  
+    console.log("Abonné ajouté avec succès !")               
                           }
 
 function afficheAbonne(){                  // fonction affichage abonnee
-           if (Tababonne.length === 0) {                                    // cas tableau vide 
-                      console.log("Aucun abonné trouvé.")                   // message pas d'abonne
+           if (Tababonne.length === 0) {                                     
+                      console.log(" \n Aucun abonné trouvé.")                   
                                       }
            else {
-        console.log("\nListe des abonnés :")                                   // titre  
-        for (let i = 0; i < Tababonne.length; i++) {                           // loop d'affichage succesive des abonée 
-                                                    console.log(Tababonne[i])    // liste des elemenet
+        console.log("\nListe des abonnés :")                                     
+        for (let i = 0; i < Tababonne.length; i++) {                            
+                                                    console.log(Tababonne[i])    
                                                     }              
                 }
                          }
 
 function emprunt(){                      // fonction enrgistrer une emprient 
-    let idLivre = +prompt("Entrez l'ID du livre à emprunter : ")     // demande id livre       
+  
+        afficherLivres()
+       idLivre = Number(prompt("\n Entrez l'ID du livre à emprunter (nomber plus 100): ") )       
                 
+                                 
+   let LivreChek = TabLivre.find(l => l.id === idLivre)   
+   while(!LivreChek)    {
+    console.log("id inixestant")
+    idLivre = Number(prompt("\nEntrez l'ID du livre à emprunter (nomber plus 100): ") )       
+                
+                                 
+   LivreChek = TabLivre.find(l => l.id === idLivre) 
+   }
+  if (!LivreChek || LivreChek.disponible !== "oui") {                
+    console.log("\nLivre non disponible ou inexistant.")      
+                                                    
+         }
 
-                                                         // Vérif si le livre  disponible
-  let livre = TabLivre.find(l => l.id === idLivre)       // trouve livre 
-  if (!livre || livre.disponible !== "oui") {                //si le livre non disponible ou id non trouver dans aucun objet
-    console.log("Livre non disponible ou inexistant.")      // message livre inixistant 
-    return                                                  // sorter de la fonction livre non trouver 
-                                             }
-      let idAbonne = +prompt("Entrez l'ID de l'abonné : ") 
+    
+        afficheAbonne()
+  let idAbonne = Number(prompt("\nEntrez l'ID de l'abonné : ") )
+  let  aboneeChek = Tababonne.find(l => l.id === idAbonne) 
+  
+  while(!aboneeChek)    {
+    console.log("\n id inixestant")
+    idAbonne = Number(prompt("\n Entrez l'ID  abonne: ") )       
+                
+                                 
+   aboneeChek = Tababonne.find(l => l.id === idAbonne) 
+   }
+
+   if (!aboneeChek) {                
+    console.log("\n abonne enixistant.")      
+                                                    
+         }
+
                                                               // Enregistrer l'emprunt
-  emprunttab.push({ idLivre, idAbonne })                      // ajout l'objt au tableau 
-  livre.disponible = "non"                                   // changer statu a non
-  console.log("Emprunt enregistré avec succès !")            // message succe tach
-  console.log(emprunttab)                                    // afiche tableau des emprunt
-                    }                         
+  emprunttab.push({ idLivre, idAbonne })                       
+  LivreChek.disponible = "non"                                  
+  console.log("\n Emprunt enregistré avec succès !")            
+  console.log(emprunttab)                                    
+                    }                              
 
 function retournerLivre() {            // fonction retourner livre 
-  let idLivre = +prompt("Entrez l'ID du livre à retourner : ");   // demander id du livre retourner 
-  let idAbonne = +prompt("Entrez l'ID de l'abonné : ");           // demander id de l'abonee retourner le livre 
+  let idLivreR = Number(prompt("\n Entrez l'ID du livre à retourner : "));    
+           
  
-  let trouve = false;
+ 
+   let LivreChek = emprunttab.find(l => l.idLivre === idLivreR)   
+   while(!LivreChek)    {
+    console.log("\n id inixestant dans les emprunt ")
+    idLivreR = Number(prompt("\n Entrez l'ID du livre a retourner : ") )       
+                
+                                 
+   LivreChek = emprunttab.find(l => l.idLivre === idLivreR) 
+   }
 
-  for (let i = 0; i < emprunttab.length; i++) {                              // for loop pour parcourire le tableau  
-    if (emprunttab[i].idLivre === idLivre && emprunttab[i].idAbonne === idAbonne) {          // cas ou livre abonee trouver 
-      emprunttab.splice(i, 1);                                    //  supprimer l'emprunt
+
+ let idAbonneR = Number(prompt("\n Entrez l'ID de l'abonné : ")); 
+
+ let idAbonneChek = emprunttab.find(l => l.idAbonne === idAbonneR)   
+   while(!idAbonneChek)    {
+    console.log("\n id inixestant dans les emprunt ")
+    idAbonneR = Number(prompt("\n Entrez l'ID abonne a nouveau : ") )       
+                
+                                 
+   idAbonneChek = emprunttab.find(l => l.idAbonne === idAbonneR) 
+   }
+
+
+
+
+
+  let trouve = false;
+  for (let i = 0; i < emprunttab.length; i++) {                              
+    if (emprunttab[i].idLivre === idLivreR && emprunttab[i].idAbonne === idAbonneR) {          
+      emprunttab.splice(i, 1);                                   
 
                                          // retrouver le livre et changer sa disponibilité
-      let livre = TabLivre.find(l => l.id === idLivre);     // variable pour chercher id livre  
-      if (livre) {livre.disponible = "oui";                  // modifier disponible on oui         
+      let livre = TabLivre.find(l => l.id === idLivreR);      
+      if (livre) {livre.disponible = "oui";                          
 
-      console.log("Retour enregistré !");                   // message tach done 
-      trouve = true;                                        // modifier  trouve to true 
-      break;                                               //arreter si condition virifier 
+      console.log("\n Retour enregistré !");                    
+      trouve = true;                                        
+      break;                                                
                                                          }                                                   }
                                                 }
 
-  if (!trouve) {                                          // si trouve rest false 
-    console.log("Aucun emprunt trouvé.");                 // message emprunt enixistant 
+  if (!trouve) {                                         
+    console.log("\n Aucun emprunt trouvé.");                 
                 }
                            }
 
 
 
-
+                                       // ========== menu principale ==========
 
 do{
   console.log(`\n ====== Gestion de bibliotheque ====== \n entrer un nombre pour choisire l'operation voulu   \n 1:ajouter liver \n 2:ajouter plusieur livre \n 3:afficher livre \n 4:tri asd/dec \n 5:tri annee \n 6:afficher livre disponible \n 7:rechrche livre par ID \n 8:ajouter abonnee \n 9:afficher abonnee \n 10:enregistrer emprunt \n 11:enregister un routour \n 12: quiter  `)
-  choix = prompt("entre un choix ")            // demander le choix 
+  choix = prompt("entre un choix ")             
 
    
-        if (choix == 1){                                 //  test des choix et appel de fonction correspondant
+        if (choix == 1){                                
                         ajouterLivre()
                         }
         else if (choix == 2) {
@@ -203,6 +263,6 @@ do{
                }
             
     
-   }while(choix !== "12" )
+    }while(choix !== "12" )
 
 
